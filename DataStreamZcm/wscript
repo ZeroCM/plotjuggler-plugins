@@ -1,0 +1,14 @@
+#! /usr/bin/env python
+
+def build(ctx):
+    DEPS = ['default', 'qt5', 'plotjuggler', 'zcm']
+    THIS_LIB = 'DataStreamZcm'
+
+    source = ctx.path.ant_glob('**/*.cpp', excl='test')
+    if len(source) != 0:
+        ctx.shlib(target = THIS_LIB,
+                  use    = DEPS,
+                  source = source)
+    else:
+        ctx(target = THIS_LIB,
+            use    = DEPS)
